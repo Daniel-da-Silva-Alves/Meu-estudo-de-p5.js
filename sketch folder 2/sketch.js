@@ -1,5 +1,6 @@
-let prevX, prevY;
+let prevX, prevY; //prevX e prevY são variáveis usadas para armazenar as coordenadas anteriores do mouse
 
+//Nesta etapa começo definindo o meu setup como o canvas e cor do backgroun
 function setup() {
 
   //Definindo o tamanho da minha tela do canvas
@@ -19,34 +20,26 @@ function setup() {
   }
 }
 
-
-if (mousePressed && mouseDragged ) {
-  fill(10);
-  ellipse(mouseX, mouseY, 10, 10);
-
-  if (prevX !== undefined && prevY !== undefined) {
-    stroke(10);
-    strokeWeight(20);
-    line(prevX, prevY, mouseX, mouseY); // Desenha uma linha entre o ponto anterior e o atual
-    ellipse(prevX, prevY, 10, 10);
-}
-}
-
-function mousePressed() {
-  fill(20)
-  ellipse(mouseX, mouseY, 15, 15);
-}
-function mouseDragged() {
-  fill(10);
-  ellipse(mouseX, mouseY, 10, 10);
-
-  if (prevX !== undefined && prevY !== undefined) {
-    stroke(10);
-    strokeWeight(20);
-    line(prevX, prevY, mouseX, mouseY); // Desenha uma linha entre o ponto anterior e o atual
-    ellipse(prevX, prevY, 10, 10);
+//Essa função sempre é ativada automaticamente antes do mouseDragged
+function keyPressed() {
+  if (key === 'c') {
+    prevX = mouseX;
+    prevY = mouseY;
   }
-
+}
+function mouseDragged() { //Quando o mouse é arrastado será desenhada uma linha entre o ponto anterior "prevY" e "prevY" e o atual "mouseX" e "mouseY"
+  stroke(10);
+  line(prevX, prevY, mouseX, mouseY)
   prevX = mouseX;
   prevY = mouseY;
+}
+
+function doubleClicked() { //Quando o mouse é dois cliques será desenhado uma linha com um ponto inicial localizado  nas úl
+  if (prevX !== undefined && prevY !== undefined) {
+    stroke(10);
+    line(prevX, prevY, mouseX, mouseY); // Desenha uma linha entre o ponto anterior e o atual
+    //ellipse(prevX, prevY, 10, 10);
+    prevX = mouseX;
+    prevY = mouseY;
+  }
 }
