@@ -1,6 +1,6 @@
 let prevX, prevY; //prevX e prevY são variáveis usadas para armazenar as coordenadas anteriores do mouse
 
-//Nesta etapa começo definindo o meu setup como o canvas e cor do backgroun
+//Nesta etapa começo definindo o meu setup como o canvas e cor do background
 function setup() {
 
   //Definindo o tamanho da minha tela do canvas
@@ -21,8 +21,11 @@ function setup() {
 }
 
 //Essa função sempre é ativada automaticamente antes do mouseDragged
-function keyPressed() {
-  if (key === 'c') {
+function mousePressed() { //Quando o mouse é clicado o armazenador de coordenadas é atualizado para o mouseX e mouseY
+  if (keyIsPressed === true) {
+    prevX = prevX;
+    prevY = prevY;
+  } else {
     prevX = mouseX;
     prevY = mouseY;
   }
@@ -34,12 +37,11 @@ function mouseDragged() { //Quando o mouse é arrastado será desenhada uma linh
   prevY = mouseY;
 }
 
-function doubleClicked() { //Quando o mouse é dois cliques será desenhado uma linha com um ponto inicial localizado  nas úl
+
+function doubleClicked() { //Quando o mouse é dois cliques será desenhado uma linha com um ponto inicial localizado nas últimas posições do mouse
   if (prevX !== undefined && prevY !== undefined) {
     stroke(10);
     line(prevX, prevY, mouseX, mouseY); // Desenha uma linha entre o ponto anterior e o atual
     //ellipse(prevX, prevY, 10, 10);
-    prevX = mouseX;
-    prevY = mouseY;
   }
 }
